@@ -78,8 +78,33 @@ const projects = [
     longDescription: (
       <div className="space-y-4 text-sm text-muted-foreground mt-4 text-left">
         <p>
-          A high-throughput, serverless event ingestion pipeline on AWS designed for fault tolerance and scalability.
+          StreamVault is a real-time, cloud-native event ingestion and analytics platform designed to capture, process, and visualize telemetry data from client applications. Currently, it acts as the centralized tracking backend for "TicketFlow," a mock ticket management system, handling events like user logins, page views, and ticket updates.
         </p>
+        <p>
+          To surface these insights, the project includes an interactive React-based "Observer" dashboard that displays a live pipeline architecture diagram, tracks key metrics (e.g., active users, agent performance, ticket resolution times), and streams an activity feed, allowing developers and product teams to monitor application health and user behavior seamlessly in real time.
+        </p>
+        
+        <div className="grid sm:grid-cols-2 gap-4 mt-4">
+          <div>
+            <h4 className="font-semibold text-foreground mb-1">Serverless Backend (AWS)</h4>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Routing:</strong> AWS API Gateway</li>
+              <li><strong>Authentication:</strong> Amazon Cognito</li>
+              <li><strong>Message Buffering:</strong> Amazon SQS</li>
+              <li><strong>Event Processing:</strong> AWS Lambda</li>
+              <li><strong>Storage:</strong> Amazon DynamoDB</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold text-foreground mb-1">Observer Dashboard</h4>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Frontend UI:</strong> React-based interface</li>
+              <li><strong>Visualization:</strong> Live pipeline architecture rendering</li>
+              <li><strong>Telemetry Tracking:</strong> User logins, page views, metrics</li>
+              <li><strong>Analytics:</strong> Real-time activity feed monitoring</li>
+            </ul>
+          </div>
+        </div>
       </div>
     )
   },
