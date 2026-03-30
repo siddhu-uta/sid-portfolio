@@ -30,7 +30,7 @@ const Footer = () => (
         {/* Social icons */}
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/vinayaksiddhu"
+            href="https://github.com/siddhu-uta"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-all duration-200"
@@ -39,7 +39,7 @@ const Footer = () => (
             <Github size={18} />
           </a>
           <a
-            href="https://linkedin.com/in/vinayaksiddhu"
+            href="https://www.linkedin.com/in/vinayak-siddhu-bandaru/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-all duration-200"

@@ -10,7 +10,7 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:vinayaksiddhu@example.com?subject=Portfolio Contact from ${form.name}&body=${encodeURIComponent(form.message)}`;
+    window.location.href = `mailto:vinayaksiddhu.devs@gmail.com?subject=Portfolio Contact from ${form.name}&body=${encodeURIComponent(form.message)}`;
     setSent(true);
     setTimeout(() => setSent(false), 4000);
   };
@@ -19,22 +19,22 @@ const ContactSection = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com/vinayaksiddhu",
-      handle: "@vinayaksiddhu",
+      href: "https://github.com/siddhu-uta",
+      handle: "@siddhu-uta",
       color: "hover:border-gray-400/40",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/vinayaksiddhu",
-      handle: "linkedin.com/in/vinayaksiddhu",
+      href: "https://www.linkedin.com/in/vinayak-siddhu-bandaru/",
+      handle: "in/vinayak-siddhu-bandaru",
       color: "hover:border-blue-400/40",
     },
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:vinayaksiddhu@example.com",
-      handle: "vinayaksiddhu@example.com",
+      href: "mailto:vinayaksiddhu.devs@gmail.com",
+      handle: "vinayaksiddhu.devs@gmail.com",
       color: "hover:border-primary/40",
     },
   ];
