@@ -76,32 +76,63 @@ const projects = [
     demo: null,
     tags: ["High-Throughput", "Fault Tolerant"],
     longDescription: (
-      <div className="space-y-4 text-sm text-muted-foreground mt-4 text-left">
+      <div className="space-y-6 text-sm text-muted-foreground mt-4 text-left">
         <p>
-          StreamVault is a real-time, cloud-native event ingestion and analytics platform designed to capture, process, and visualize telemetry data from client applications. Currently, it acts as the centralized tracking backend for "TicketFlow," a mock ticket management system, handling events like user logins, page views, and ticket updates.
+          StreamVault is a real-time, cloud-native event ingestion and analytics platform designed to capture, process, and visualize telemetry data from client applications. Currently, it acts as the centralized tracking backend for "TicketFlow," a mock ticket management system.
         </p>
-        <p>
-          To surface these insights, the project includes an interactive React-based "Observer" dashboard that displays a live pipeline architecture diagram, tracks key metrics (e.g., active users, agent performance, ticket resolution times), and streams an activity feed, allowing developers and product teams to monitor application health and user behavior seamlessly in real time.
-        </p>
-        
-        <div className="grid sm:grid-cols-2 gap-4 mt-4">
+
+        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-8 mt-2">
+          {/* Cloud & Infrastructure */}
           <div>
-            <h4 className="font-semibold text-foreground mb-1">Serverless Backend (AWS)</h4>
-            <ul className="list-disc pl-4 space-y-1">
-              <li><strong>Routing:</strong> AWS API Gateway</li>
-              <li><strong>Authentication:</strong> Amazon Cognito</li>
-              <li><strong>Message Buffering:</strong> Amazon SQS</li>
-              <li><strong>Event Processing:</strong> AWS Lambda</li>
-              <li><strong>Storage:</strong> Amazon DynamoDB</li>
+            <h4 className="font-semibold text-foreground mb-2 flex items-center gap-1.5">
+              <span>☁️</span> Cloud & Infrastructure (AWS Serverless)
+            </h4>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-muted-foreground/90">
+              <li><strong>API Gateway:</strong> Handles inbound REST API requests and routing.</li>
+              <li><strong>Amazon Cognito:</strong> Manages user identity, OAuth2, and Auth flows.</li>
+              <li><strong>Amazon SQS:</strong> Message broker buffering high-throughput events.</li>
+              <li><strong>AWS Lambda:</strong> Serverless processing (Ingest & Processor).</li>
+              <li><strong>Amazon DynamoDB:</strong> NoSQL database for persistent event storage.</li>
+              <li><strong>AWS SAM & LocalStack:</strong> IaC deployment and offline simulation.</li>
             </ul>
           </div>
+          
+          {/* Backend Pipelines & Apps */}
           <div>
-            <h4 className="font-semibold text-foreground mb-1">Observer Dashboard</h4>
-            <ul className="list-disc pl-4 space-y-1">
-              <li><strong>Frontend UI:</strong> React-based interface</li>
-              <li><strong>Visualization:</strong> Live pipeline architecture rendering</li>
-              <li><strong>Telemetry Tracking:</strong> User logins, page views, metrics</li>
-              <li><strong>Analytics:</strong> Real-time activity feed monitoring</li>
+            <h4 className="font-semibold text-foreground mb-2 flex items-center gap-1.5">
+              <span>⚙️</span> Backend Core & Mock Service
+            </h4>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-muted-foreground/90 mb-4">
+              <li><strong>Python 3.x:</strong> Primary language for Lambda functions.</li>
+              <li><strong>Node.js & Express:</strong> Simulated client application backend.</li>
+              <li><strong>Security & Sessions:</strong> Bcrypt.js, Express-Session.</li>
+              <li><strong>Integrations:</strong> Node-Fetch for tracking HTTP calls.</li>
+            </ul>
+          </div>
+
+          {/* Frontend */}
+          <div>
+            <h4 className="font-semibold text-foreground mb-2 flex items-center gap-1.5">
+              <span>💻</span> Frontend (Observer Dashboard)
+            </h4>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-muted-foreground/90">
+              <li><strong>React 18 & Vite:</strong> Ultra-fast component-based UI framework.</li>
+              <li><strong>TypeScript:</strong> Strongly-typed frontend logic.</li>
+              <li><strong>Styling:</strong> CSS3 & HTML5 for structure and layout.</li>
+              <li><strong>Dashboard:</strong> Real-time visualizations and activity feeds.</li>
+            </ul>
+          </div>
+          
+          {/* Testing & QA */}
+          <div>
+            <h4 className="font-semibold text-foreground mb-2 flex items-center gap-1.5">
+              <span>🧪</span> Testing, Tooling & QA
+            </h4>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-muted-foreground/90">
+              <li><strong>Locust:</strong> Python distributed load-testing framework.</li>
+              <li><strong>Jest & PyTest:</strong> JavaScript and Python Backend testing frameworks.</li>
+              <li><strong>Package Management:</strong> NPM & Pip.</li>
+              <li><strong>Version Control:</strong> Git with structured branching strategies.</li>
             </ul>
           </div>
         </div>
