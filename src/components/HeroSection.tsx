@@ -161,7 +161,9 @@ const HeroSection = () => {
               <ChevronRight size={16} />
             </a>
             <a
-              href="#"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border/60 bg-card/50 text-foreground font-semibold text-sm hover:bg-secondary hover:border-border transition-all duration-300"
             >
               <FileText size={16} className="text-primary" />
