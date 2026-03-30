@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Sid Portfolio
 
-TODO: Document your project here
+Welcome to Sid's personal portfolio website!
