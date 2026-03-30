@@ -1,6 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const projects = [
   {
@@ -13,6 +21,49 @@ const projects = [
     github: "#",
     demo: null,
     tags: ["Clean Architecture", "Full CI/CD"],
+    longDescription: (
+      <div className="space-y-4 text-sm text-muted-foreground mt-4 text-left">
+        <p>
+          TicketOps is a production-ready, enterprise-grade ticket management system designed to showcase comprehensive DevSecOps practices and cloud-native architecture. It operates as a modern full-stack application, featuring a backend built with Java 17 and Spring Boot 3 running on PostgreSQL, and a frontend developed using React 18, TypeScript, Vite, and Tailwind CSS.
+        </p>
+        <p>
+          Beyond just creating and managing tickets, the project heavily emphasizes infrastructure and continuous delivery, incorporating Docker for containerization, Kubernetes and Docker Swarm for orchestration, Terraform and Ansible for Infrastructure as Code (IaC), and multi-stage Azure DevOps pipelines for automated CI/CD and deployment.
+        </p>
+        
+        <div className="grid sm:grid-cols-2 gap-4 mt-4">
+          <div>
+            <h4 className="font-semibold text-foreground mb-1">Backend</h4>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Language:</strong> Java 17</li>
+              <li><strong>Framework:</strong> Spring Boot (v3.1.4)</li>
+              <li><strong>Data Access:</strong> Spring Data JPA / Hibernate</li>
+              <li><strong>Logging:</strong> Logback with Logstash</li>
+              <li><strong>Migrations:</strong> Flyway</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold text-foreground mb-1">Frontend</h4>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Core:</strong> React 18, TypeScript, Vite, Tailwind CSS</li>
+              <li><strong>UI Components:</strong> shadcn/ui, Lucide React</li>
+              <li><strong>Forms & State:</strong> React Hook Form, Zod, React Query</li>
+              <li><strong>Testing:</strong> Vitest, React Testing Library</li>
+            </ul>
+          </div>
+          <div className="sm:col-span-2">
+            <h4 className="font-semibold text-foreground mb-1">Infrastructure & DevSecOps</h4>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Database:</strong> PostgreSQL</li>
+              <li><strong>Containerization:</strong> Docker (multi-stage builds), Docker Compose</li>
+              <li><strong>Orchestration:</strong> Kubernetes (Deployments, Services, Ingress, HPA, PDB), Docker Swarm</li>
+              <li><strong>IaC:</strong> Terraform (AWS EKS), Ansible</li>
+              <li><strong>CI/CD:</strong> Azure DevOps (Multi-stage YAML pipelines)</li>
+              <li><strong>Cloud Services:</strong> AWS, Azure Container Instances</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
     number: "02",
@@ -24,6 +75,13 @@ const projects = [
     github: "#",
     demo: null,
     tags: ["High-Throughput", "Fault Tolerant"],
+    longDescription: (
+      <div className="space-y-4 text-sm text-muted-foreground mt-4 text-left">
+        <p>
+          A high-throughput, serverless event ingestion pipeline on AWS designed for fault tolerance and scalability.
+        </p>
+      </div>
+    )
   },
   {
     number: "03",
@@ -35,6 +93,13 @@ const projects = [
     github: "#",
     demo: "#",
     tags: ["Animated", "Dark Mode"],
+    longDescription: (
+      <div className="space-y-4 text-sm text-muted-foreground mt-4 text-left">
+        <p>
+          A modern, animated developer portfolio built with React, TypeScript, Framer Motion, and Tailwind CSS. Features dark/light theming, smooth scroll animations, typewriter effects, glassmorphism design, and full responsiveness.
+        </p>
+      </div>
+    )
   },
 ];
 
@@ -64,74 +129,117 @@ const ProjectsSection = () => {
 
           <div className="grid lg:grid-cols-3 gap-6">
             {projects.map((project, i) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.15 + i * 0.15 }}
-                className="group relative p-6 rounded-2xl glass border border-border/60 hover:border-primary/25 hover:bg-secondary/25 transition-all duration-300 flex flex-col"
-              >
-                {/* Header */}
-                <div className="mb-4">
-                  <div className="flex items-center gap-2 mb-2.5">
-                    <span className="font-mono text-[10px] font-medium text-muted-foreground/35 tracking-[0.2em] select-none">{project.number}</span>
-                    <div className="h-px flex-1 bg-border/25" />
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-foreground mb-1">
-                    {project.title}
-                  </h3>
-                  <p className="text-primary text-xs font-semibold uppercase tracking-wide">{project.summary}</p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mt-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] text-muted-foreground bg-secondary/60 border border-border/50 px-2 py-0.5 rounded-md"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
-                  {project.description}
-                </p>
-
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-secondary/70 text-muted-foreground border border-border/50 hover:border-primary/30 hover:text-primary transition-colors duration-150"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-2 mt-auto">
-                  <a
-                    href={project.github}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-border/60 bg-secondary/30 text-foreground hover:bg-secondary/60 hover:border-border transition-all duration-200"
+              <Dialog key={project.title}>
+                <DialogTrigger asChild>
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.15 + i * 0.15 }}
+                    className="group relative p-6 rounded-2xl glass border border-border/60 hover:border-primary/25 hover:bg-secondary/25 transition-all duration-300 flex flex-col cursor-pointer"
                   >
-                    <Github size={13} />
-                    GitHub
-                  </a>
-                  {project.demo && (
+                    {/* Header */}
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 mb-2.5">
+                        <span className="font-mono text-[10px] font-medium text-muted-foreground/35 tracking-[0.2em] select-none">{project.number}</span>
+                        <div className="h-px flex-1 bg-border/25" />
+                      </div>
+                      <h3 className="font-display text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-primary text-xs font-semibold uppercase tracking-wide">{project.summary}</p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-1.5 mt-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] text-muted-foreground bg-secondary/60 border border-border/50 px-2 py-0.5 rounded-md"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                      {project.description}
+                    </p>
+
+                    {/* Tech stack */}
+                    <div className="flex flex-wrap gap-1.5 mb-5">
+                      {project.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-secondary/70 text-muted-foreground border border-border/50 hover:border-primary/30 hover:text-primary transition-colors duration-150"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-2 mt-auto pt-2 border-t border-border/30" onClick={(e) => e.stopPropagation()}>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-border/60 bg-secondary/30 text-foreground hover:bg-secondary/60 hover:border-border transition-all duration-200"
+                      >
+                        <Github size={13} />
+                        GitHub
+                      </a>
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-primary/30 bg-primary/8 text-primary hover:bg-primary/12 hover:border-primary/40 transition-all duration-200"
+                        >
+                          <ArrowUpRight size={13} />
+                          Live Demo
+                        </a>
+                      )}
+                    </div>
+                  </motion.div>
+                </DialogTrigger>
+                
+                <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto w-[90vw] glass border-border/60 bg-background/95 backdrop-blur-xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-display font-bold text-foreground">
+                      {project.title}
+                    </DialogTitle>
+                    <DialogDescription className="text-primary font-medium">
+                      {project.summary}
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  {project.longDescription}
+
+                  <div className="flex items-center gap-3 mt-6 pt-4 border-t border-border/40">
                     <a
-                      href={project.demo}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-primary/30 bg-primary/8 text-primary hover:bg-primary/12 hover:border-primary/40 transition-all duration-200"
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-border/60 bg-card/50 text-foreground font-semibold text-sm hover:bg-secondary hover:border-border transition-all duration-200"
                     >
-                      <ArrowUpRight size={13} />
-                      Live Demo
+                      <Github size={16} />
+                      View Source
                     </a>
-                  )}
-                </div>
-              </motion.div>
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-primary/40 bg-primary/10 text-primary font-semibold text-sm hover:bg-primary/15 hover:border-primary/60 transition-all duration-200"
+                      >
+                        <ArrowUpRight size={16} />
+                        Live Deploy
+                      </a>
+                    )}
+                  </div>
+                </DialogContent>
+              </Dialog>
             ))}
           </div>
 
