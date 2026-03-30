@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { ArrowDown, FileText, Mail, Terminal, ChevronRight } from "lucide-react";
+import { ArrowDown, FileText, Mail, Terminal, ChevronRight, Github, Linkedin } from "lucide-react";
 
 const roles = [
   "Backend Engineer",
@@ -93,20 +93,41 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Status badge */}
+          {/* Social Links Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="flex items-center justify-center mb-8"
           >
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-secondary/60 border border-primary/20 mb-8 backdrop-blur-sm">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
-              </span>
-              <span className="text-xs font-medium text-muted-foreground tracking-widest uppercase">
-                Open to Opportunities
-              </span>
+            <div className="inline-flex items-center gap-5 px-6 py-2.5 rounded-full bg-secondary/60 border border-primary/20 backdrop-blur-sm">
+              <a
+                href="https://github.com/siddhu-uta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                aria-label="GitHub"
+              >
+                <Github size={20} />
+              </a>
+              <div className="w-px h-4 bg-border/60"></div>
+              <a
+                href="https://www.linkedin.com/in/vinayak-siddhu-bandaru/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a>
+              <div className="w-px h-4 bg-border/60"></div>
+              <a
+                href="mailto:vinayaksiddhu.devs@gmail.com"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                aria-label="Email"
+              >
+                <Mail size={20} />
+              </a>
             </div>
           </motion.div>
 
