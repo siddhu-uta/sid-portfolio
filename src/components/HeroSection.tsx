@@ -39,56 +39,42 @@ const HeroSection = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden noise-bg"
     >
       {/* Layered background */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Base gradient */}
         <div className="absolute inset-0 bg-gradient-hero" />
 
-        {/* Large soft orbs */}
+        {/* Dot grid — replaces crosshatch */}
         <div
-          className="absolute top-1/4 -left-24 w-[500px] h-[500px] rounded-full blur-[120px] opacity-30 animate-float-slow"
-          style={{ background: "hsl(215 50% 62% / 0.12)" }}
-        />
-        <div
-          className="absolute bottom-1/4 -right-24 w-[450px] h-[450px] rounded-full blur-[100px] opacity-25 animate-float-slow"
-          style={{ background: "hsl(215 55% 72% / 0.10)", animationDelay: "3s" }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-10"
-          style={{ background: "hsl(215 50% 62% / 0.08)" }}
-        />
-
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.18]"
           style={{
-            backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
+            backgroundImage: `radial-gradient(hsl(var(--foreground) / 0.35) 1px, transparent 1px)`,
+            backgroundSize: "28px 28px",
           }}
         />
 
-        {/* Floating particles */}
-        {[
-          { top: "15%", left: "10%", dur: "7s", delay: "0s" },
-          { top: "75%", left: "8%", dur: "9s", delay: "1.5s" },
-          { top: "40%", left: "85%", dur: "6s", delay: "0.8s" },
-          { top: "20%", left: "70%", dur: "8s", delay: "2s" },
-          { top: "80%", left: "75%", dur: "10s", delay: "0.3s" },
-          { top: "55%", left: "20%", dur: "7.5s", delay: "1.2s" },
-        ].map((p, i) => (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              top: p.top,
-              left: p.left,
-              "--dur": p.dur,
-              "--delay": p.delay,
-            } as React.CSSProperties}
-          />
-        ))}
+        {/* Noise grain overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            backgroundSize: "256px 256px",
+          }}
+        />
+
+        {/* Primary blue glow — upper left */}
+        <div
+          className="absolute -top-20 -left-20 w-[420px] h-[420px] rounded-full blur-[140px] opacity-20 animate-float-slow"
+          style={{ background: "hsl(215 50% 62% / 0.18)" }}
+        />
+
+        {/* Warm amber accent glow — lower right, for contrast */}
+        <div
+          className="absolute bottom-10 -right-16 w-[340px] h-[340px] rounded-full blur-[120px] opacity-20 animate-float-slow"
+          style={{ background: "hsl(35 95% 60% / 0.14)", animationDelay: "4s" }}
+        />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -174,13 +160,16 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-wrap items-center justify-center gap-4"
           >
+            {/* Primary CTA — most visually dominant */}
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-primary/40 bg-primary/8 text-primary font-semibold text-sm hover:bg-primary/12 hover:border-primary/55 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all duration-300 shadow-lg"
+              style={{ boxShadow: "var(--glow-primary)" }}
             >
               View Projects
               <ChevronRight size={16} />
             </a>
+            {/* Secondary CTA — outlined */}
             <a
               href="/resume.pdf"
               target="_blank"
@@ -188,13 +177,14 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border/60 bg-card/50 text-foreground font-semibold text-sm hover:bg-secondary hover:border-border transition-all duration-300"
             >
               <FileText size={16} className="text-primary" />
-              Download Resume
+              Resume
             </a>
+            {/* Tertiary — text link style */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border/60 bg-card/50 text-foreground font-semibold text-sm hover:bg-secondary hover:border-border transition-all duration-300"
+              className="inline-flex items-center gap-1.5 px-4 py-3.5 text-muted-foreground font-medium text-sm hover:text-foreground transition-colors duration-200"
             >
-              <Mail size={16} className="text-primary" />
+              <Mail size={15} />
               Contact Me
             </a>
           </motion.div>
@@ -204,17 +194,17 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-8 mt-16 text-sm text-muted-foreground"
+            className="flex flex-wrap items-center justify-center gap-10 mt-16 text-sm text-muted-foreground"
           >
             {[
-              { value: "3+", label: "Years Coding" },
-              { value: "10+", label: "Technologies" },
-              { value: "2", label: "Major Projects" },
-              { value: "AWS", label: "Certified Focus" },
+              { value: "3+", label: "Years of Experience" },
+              { value: "15+", label: "Technologies Used" },
+              { value: "2", label: "Production Projects" },
+              { value: "MS", label: "CS @ UT Arlington" },
             ].map((stat, i) => (
-              <div key={i} className="flex flex-col items-center gap-1">
+              <div key={i} className="flex flex-col items-center gap-1.5">
                 <span className="font-display text-2xl font-bold text-gradient">{stat.value}</span>
-                <span className="text-xs text-muted-foreground">{stat.label}</span>
+                <span className="text-[11px] uppercase tracking-widest text-muted-foreground/60 font-medium">{stat.label}</span>
               </div>
             ))}
           </motion.div>

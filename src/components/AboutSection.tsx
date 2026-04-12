@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { GraduationCap, BookOpen, MapPin, Zap } from "lucide-react";
+import { GraduationCap, BookOpen, MapPin, Zap, BadgeCheck, Target, ShoppingBag } from "lucide-react";
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -62,6 +62,35 @@ const AboutSection = () => {
                     {tag}
                   </span>
                 ))}
+              </div>
+
+              {/* Credentials */}
+              <div className="pt-4 space-y-2">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/50 mb-3">Credentials & Training</p>
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-secondary/30 border border-border/50 hover:border-primary/20 transition-colors duration-200">
+                  <div className="w-8 h-8 rounded-lg bg-secondary/60 border border-border/60 flex items-center justify-center flex-shrink-0">
+                    <ShoppingBag size={14} className="text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-foreground leading-tight">Walmart Global Tech — Advanced SWE</p>
+                    <p className="text-[11px] text-muted-foreground">Forage Job Simulation · 2024</p>
+                  </div>
+                  <span className="text-[10px] font-semibold text-primary bg-primary/8 border border-primary/20 px-2 py-0.5 rounded-full flex-shrink-0">
+                    <BadgeCheck size={10} className="inline mr-0.5" />Verified
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-primary/4 border border-dashed border-primary/20 hover:border-primary/35 transition-colors duration-200">
+                  <div className="w-8 h-8 rounded-lg bg-secondary/60 border border-border/60 flex items-center justify-center flex-shrink-0">
+                    <Target size={14} className="text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-foreground leading-tight">AWS Solutions Architect — Associate</p>
+                    <p className="text-[11px] text-muted-foreground">Preparing · Expected 2025</p>
+                  </div>
+                  <span className="text-[10px] font-semibold text-primary bg-primary/8 border border-primary/20 px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap">
+                    In Progress
+                  </span>
+                </div>
               </div>
             </div>
 

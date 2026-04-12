@@ -55,12 +55,15 @@ const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-              Let's <span className="text-gradient">Connect</span>
-            </h2>
-            <div className="w-16 h-1 bg-gradient-primary rounded-full mb-6 mx-auto" />
-            <p className="text-muted-foreground max-w-lg mx-auto">
+          <div className="mb-12">
+            <div className="flex items-baseline justify-between flex-wrap gap-4 mb-4">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                Let's <span className="text-gradient">Connect</span>
+              </h2>
+              <span className="font-mono text-sm text-muted-foreground/35 tracking-[0.2em] select-none hidden sm:block">/ reach out</span>
+            </div>
+            <div className="w-16 h-1 bg-gradient-primary rounded-full mb-6" />
+            <p className="text-muted-foreground max-w-lg">
               I'm always open to discussing new opportunities, interesting projects, or just connecting
               with fellow engineers. Drop me a message!
             </p>

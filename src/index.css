@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -27,12 +27,18 @@
     --ring: 215 45% 52%;
     --radius: 0.75rem;
 
+    --accent-warm: 35 95% 60%;
+    --accent-warm-foreground: 0 0% 5%;
+
     --gradient-primary: linear-gradient(135deg, hsl(215 45% 52%), hsl(215 55% 68%));
+    --gradient-warm: linear-gradient(135deg, hsl(35 95% 60%), hsl(38 90% 70%));
+    --gradient-mixed: linear-gradient(135deg, hsl(215 45% 52%), hsl(35 95% 60%));
     --gradient-subtle: linear-gradient(135deg, hsl(215 45% 52% / 0.08), hsl(215 55% 68% / 0.08));
     --gradient-hero: linear-gradient(135deg, hsl(215 45% 52% / 0.05), hsl(215 55% 68% / 0.05));
     --glow-primary: 0 0 30px hsl(215 45% 52% / 0.15);
     --glow-accent: 0 0 30px hsl(215 45% 52% / 0.12);
     --glow-teal: 0 0 40px hsl(215 45% 52% / 0.10);
+    --glow-warm: 0 0 30px hsl(35 95% 60% / 0.20);
   }
 
   .dark {
@@ -56,12 +62,18 @@
     --input: 0 0% 14%;
     --ring: 215 50% 62%;
 
+    --accent-warm: 35 90% 58%;
+    --accent-warm-foreground: 0 0% 5%;
+
     --gradient-primary: linear-gradient(135deg, hsl(215 50% 62%), hsl(215 55% 72%));
+    --gradient-warm: linear-gradient(135deg, hsl(35 90% 58%), hsl(38 85% 68%));
+    --gradient-mixed: linear-gradient(135deg, hsl(215 50% 62%), hsl(35 90% 58%));
     --gradient-subtle: linear-gradient(135deg, hsl(215 50% 62% / 0.08), hsl(215 55% 72% / 0.08));
     --gradient-hero: linear-gradient(135deg, hsl(215 50% 62% / 0.05), hsl(215 55% 72% / 0.04));
     --glow-primary: 0 0 40px hsl(215 50% 62% / 0.12);
     --glow-accent: 0 0 40px hsl(215 50% 62% / 0.10);
     --glow-teal: 0 0 50px hsl(215 50% 62% / 0.08);
+    --glow-warm: 0 0 35px hsl(35 90% 58% / 0.18);
 
     --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 210 10% 90%;
@@ -81,7 +93,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
 
   h1,
@@ -90,7 +102,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Syne', sans-serif;
   }
 
   code,
@@ -110,12 +122,29 @@
     background-image: var(--gradient-primary);
   }
 
+  .bg-gradient-warm {
+    background-image: var(--gradient-warm);
+  }
+
+  .bg-gradient-mixed {
+    background-image: var(--gradient-mixed);
+  }
+
   .bg-gradient-subtle {
     background-image: var(--gradient-subtle);
   }
 
   .bg-gradient-hero {
     background-image: var(--gradient-hero);
+  }
+
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-warm);
+  }
+
+  .glow-warm {
+    box-shadow: var(--glow-warm);
   }
 
   .glow-primary {
@@ -315,7 +344,7 @@ html {
 }
 
 .gradient-border:hover::before {
-  opacity: 0;
+  opacity: 1;
 }
 
 /* Particle dots */

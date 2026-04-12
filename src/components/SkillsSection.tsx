@@ -55,9 +55,12 @@ const SkillsSection = () => {
           transition={{ duration: 0.6 }}
           className="max-w-5xl mx-auto"
         >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Technical <span className="text-gradient">Skills</span>
-          </h2>
+          <div className="flex items-baseline gap-4 mb-4">
+            <span className="font-mono text-sm font-medium text-muted-foreground/40 tracking-[0.2em] select-none">02 /</span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+              Technical <span className="text-gradient">Skills</span>
+            </h2>
+          </div>
           <div className="w-16 h-1 bg-gradient-primary rounded-full mb-12" />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
