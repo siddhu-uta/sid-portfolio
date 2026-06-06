@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun, Code2 } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
@@ -17,16 +15,14 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove("light");
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      // Active section detection
-      const sections = navLinks.map((l) => l.href.slice(1));
-      for (const id of sections.reverse()) {
+      setScrolled(window.scrollY > 10);
+      const sections = ["experience", "projects", "contact"];
+      for (const id of [...sections].reverse()) {
         const el = document.getElementById(id);
         if (el && window.scrollY >= el.offsetTop - 120) {
           setActiveSection(id);
@@ -41,29 +37,43 @@ const Navbar = () => {
 
   const toggleTheme = () => {
     setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
+    document.documentElement.classList.toggle("light");
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-          ? "glass-strong shadow-xl shadow-black/10 py-3"
-          : "bg-transparent py-5"
-        }`}
-    >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Brand */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-200">
-            <Code2 size={16} className="text-primary-foreground" />
+    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+      {/* Pill container */}
+      <div
+        className="w-full max-w-3xl flex items-center justify-between px-4 py-2.5 transition-all duration-300"
+        style={{
+          borderRadius: "9999px",
+          background: scrolled ? "var(--nav-bg)" : "var(--nav-bg-dim)",
+          border: "1px solid var(--border-subtle)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          boxShadow: scrolled ? "var(--shadow-nav)" : "none",
+        }}
+      >
+        {/* Brand — avatar + name */}
+        <a href="#" className="flex items-center gap-2.5 group">
+          <div
+            className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+            style={{
+              background: "linear-gradient(135deg, #58a6ff, #bc8cff)",
+              color: "#0d1117",
+            }}
+          >
+            VS
           </div>
-          <span className="font-display text-lg font-bold text-foreground tracking-tight">
-            <span className="text-gradient">Sid</span>
-            <span className="text-muted-foreground font-normal">.dev</span>
+          <span
+            className="font-display text-base font-semibold hidden sm:block"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Vinayak Siddhu
           </span>
         </a>
 
-        {/* Desktop nav */}
+        {/* Desktop nav links */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.slice(1);
@@ -71,103 +81,84 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${isActive
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-                  }`}
+                className="relative px-4 py-1.5 text-base font-medium rounded-full transition-all duration-200"
+                style={{
+                  color: isActive ? "var(--blue-accent)" : "var(--text-secondary)",
+                  background: isActive ? "var(--nav-hover-bg)" : "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-secondary)";
+                }}
               >
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 rounded-lg bg-primary/10 border border-primary/20"
-                    transition={{ type: "spring", bounce: 0.3, duration: 0.35 }}
-                  />
-                )}
-                <span className="relative">{link.label}</span>
+                {link.label}
               </a>
             );
           })}
         </div>
 
         {/* Right actions */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-secondary transition-colors border border-transparent hover:border-border/50"
+            className="p-1.5 rounded-full transition-colors"
+            style={{ color: "var(--text-muted)" }}
+            onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.color = "var(--text-primary)"}
+            onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = "var(--text-muted)"}
             aria-label="Toggle theme"
           >
-            {isDark ? (
-              <Sun size={17} className="text-muted-foreground" />
-            ) : (
-              <Moon size={17} className="text-muted-foreground" />
-            )}
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <a
-            href="#contact"
-            className="px-4 py-2 rounded-lg bg-gradient-warm text-[hsl(0,0%,5%)] text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"
-            style={{ boxShadow: "var(--glow-warm)" }}
-          >
-            Hire Me
-          </a>
-        </div>
 
-        {/* Mobile toggle */}
-        <div className="flex md:hidden items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-secondary transition-colors"
-            aria-label="Toggle theme"
-          >
-            {isDark ? (
-              <Sun size={17} className="text-muted-foreground" />
-            ) : (
-              <Moon size={17} className="text-muted-foreground" />
-            )}
-          </button>
+          {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2 rounded-lg hover:bg-secondary transition-colors"
+            className="flex md:hidden p-1.5 rounded-full transition-colors"
+            style={{ color: "var(--text-muted)" }}
             aria-label="Menu"
           >
-            {mobileOpen ? (
-              <X size={20} className="text-foreground" />
-            ) : (
-              <Menu size={20} className="text-foreground" />
-            )}
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile dropdown */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-strong border-t border-border/50"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-[68px] left-4 right-4 mx-auto max-w-3xl rounded-2xl p-3 flex flex-col gap-1"
+            style={{
+              background: "var(--nav-dropdown)",
+              border: "1px solid var(--border-subtle)",
+              backdropFilter: "blur(16px)",
+              boxShadow: "var(--shadow-nav)",
+            }}
           >
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/60 px-4 py-2.5 rounded-lg transition-all"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="mt-2 pt-2 border-t border-border/50">
-                <a
-                  href="#contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-center px-4 py-2.5 rounded-lg bg-gradient-warm text-[hsl(0,0%,5%)] text-sm font-semibold"
-                >
-                  Hire Me
-                </a>
-              </div>
-            </div>
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+                style={{ color: "var(--text-secondary)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-primary)";
+                  (e.currentTarget as HTMLAnchorElement).style.background = "var(--nav-hover-bg)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-secondary)";
+                  (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>

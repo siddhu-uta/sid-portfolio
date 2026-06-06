@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, Send, CheckCircle2 } from "lucide-react";
 
 const ContactSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -16,172 +16,133 @@ const ContactSection = () => {
   };
 
   const socials = [
-    {
-      icon: Github,
-      label: "GitHub",
-      href: "https://github.com/siddhu-uta",
-      handle: "@siddhu-uta",
-      color: "hover:border-gray-400/40",
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/vinayak-siddhu-bandaru/",
-      handle: "in/vinayak-siddhu-bandaru",
-      color: "hover:border-blue-400/40",
-    },
-    {
-      icon: Mail,
-      label: "Email",
-      href: "mailto:vinayaksiddhu.devs@gmail.com",
-      handle: "vinayaksiddhu.devs@gmail.com",
-      color: "hover:border-primary/40",
-    },
+    { icon: Github, label: "GitHub", href: "https://github.com/siddhu-uta", handle: "@siddhu-uta" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/vinayak-siddhu-bandaru/", handle: "vinayak-siddhu-bandaru" },
+    { icon: Mail, label: "Email", href: "mailto:vinayaksiddhu.devs@gmail.com", handle: "vinayaksiddhu.devs@gmail.com" },
   ];
 
-  return (
-    <section id="contact" className="py-24 sm:py-32 relative overflow-hidden" ref={ref}>
-      {/* BG */}
-      <div className="absolute inset-0 bg-secondary/15 pointer-events-none" />
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-48 rounded-full blur-[100px] opacity-10 pointer-events-none"
-        style={{ background: "hsl(215 50% 62% / 0.08)" }}
-      />
+  const inputStyle = {
+    background: "var(--bg-card)",
+    border: "1px solid var(--border-subtle)",
+    borderRadius: "8px",
+    color: "var(--text-primary)",
+    padding: "11px 16px",
+    fontSize: "15px",
+    width: "100%",
+    outline: "none",
+    transition: "border-color 0.15s",
+  } as React.CSSProperties;
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="mb-12">
-            <div className="flex items-baseline justify-between flex-wrap gap-4 mb-4">
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
-                Let's <span className="text-gradient">Connect</span>
-              </h2>
-              <span className="font-mono text-sm text-muted-foreground/35 tracking-[0.2em] select-none hidden sm:block">/ reach out</span>
-            </div>
-            <div className="w-16 h-1 bg-gradient-primary rounded-full mb-6" />
-            <p className="text-muted-foreground max-w-lg">
-              I'm always open to discussing new opportunities, interesting projects, or just connecting
-              with fellow engineers. Drop me a message!
-            </p>
-          </div>
+  return (
+    <section id="contact" className="py-20 sm:py-28" style={{ background: "var(--bg-base)" }} ref={ref}>
+      <div className="container mx-auto px-6">
+        <div className="max-w-5xl mx-auto">
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-2.5 mb-10"
+          >
+            <span className="text-sm font-mono" style={{ color: "var(--blue-accent)" }}>{"</>"}</span>
+            <h2 className="text-3xl font-bold" style={{ color: "var(--text-primary)", letterSpacing: "-0.025em" }}>Contact</h2>
+          </motion.div>
 
           <div className="grid md:grid-cols-5 gap-10">
-            {/* Social links (2/5) */}
-            <div className="md:col-span-2 space-y-4">
-              <h3 className="font-display text-base font-semibold text-foreground mb-5">Find me online</h3>
-              {socials.map((social, i) => (
+            {/* Socials */}
+            <div className="md:col-span-2 space-y-3">
+              {socials.map((s, i) => (
                 <motion.a
                   key={i}
-                  href={social.href}
+                  href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
-                  className={`flex items-center gap-4 p-4 rounded-xl glass ${social.color} transition-all duration-300 group hover:shadow-lg`}
+                  transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
+                  className="flex items-center gap-3.5 p-3.5 rounded-xl transition-all duration-200"
+                  style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--text-muted)"}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--border-subtle)"}
                 >
-                  <div className="p-2.5 rounded-lg bg-gradient-subtle border border-primary/20 group-hover:bg-gradient-primary transition-all duration-300">
-                    <social.icon size={18} className="text-primary group-hover:text-primary-foreground transition-colors" />
-                  </div>
+                  <s.icon size={17} style={{ color: "var(--blue-accent)", flexShrink: 0 }} />
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-foreground">{social.label}</p>
-                    <p className="text-xs text-muted-foreground truncate">{social.handle}</p>
+                    <p className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>{s.label}</p>
+                    <p className="text-xs truncate mt-0.5" style={{ color: "var(--text-muted)" }}>{s.handle}</p>
                   </div>
                 </motion.a>
               ))}
 
-              {/* Availability badge */}
+              {/* Availability */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.6 }}
-                className="p-4 rounded-xl bg-primary/5 border border-primary/20 flex items-center gap-3"
+                transition={{ delay: 0.4 }}
+                className="flex items-center gap-2.5 p-3.5 rounded-xl mt-1"
+                style={{ background: "rgba(63,185,80,0.06)", border: "1px solid rgba(63,185,80,0.2)" }}
               >
-                <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+                <span className="relative flex h-2 w-2 flex-shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style={{ background: "var(--green)" }} />
+                  <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: "var(--green)" }} />
                 </span>
-                <p className="text-xs text-muted-foreground">
-                  <span className="text-primary font-semibold">Available</span> for full-time roles & internships
+                <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <span className="font-semibold" style={{ color: "var(--green)" }}>Available</span> for full-time roles
                 </p>
               </motion.div>
             </div>
 
-            {/* Contact form (3/5) */}
+            {/* Form */}
             <motion.form
               onSubmit={handleSubmit}
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 16 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="md:col-span-3 space-y-4"
+              transition={{ duration: 0.45, delay: 0.2 }}
+              className="md:col-span-3 space-y-3"
             >
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="text-xs font-semibold text-foreground mb-1.5 block uppercase tracking-wide">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-card/60 border border-border/60 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="text-xs font-semibold text-foreground mb-1.5 block uppercase tracking-wide">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-card/60 border border-border/60 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
-                    placeholder="your@email.com"
-                  />
-                </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {(["name", "email"] as const).map((field) => (
+                  <div key={field}>
+                    <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: "var(--text-secondary)" }}>
+                      {field}
+                    </label>
+                    <input
+                      type={field === "email" ? "email" : "text"}
+                      required
+                      value={form[field]}
+                      onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                      placeholder={field === "email" ? "you@example.com" : "Your name"}
+                      style={inputStyle}
+                      onFocus={(e) => (e.target.style.borderColor = "var(--blue-accent)")}
+                      onBlur={(e) => (e.target.style.borderColor = "var(--border-subtle)")}
+                    />
+                  </div>
+                ))}
               </div>
               <div>
-                <label htmlFor="message" className="text-xs font-semibold text-foreground mb-1.5 block uppercase tracking-wide">
+                <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: "var(--text-secondary)" }}>
                   Message
                 </label>
                 <textarea
-                  id="message"
                   required
                   rows={5}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card/60 border border-border/60 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all resize-none"
                   placeholder="Let's talk about..."
+                  style={{ ...inputStyle, resize: "none" }}
+                  onFocus={(e) => (e.target.style.borderColor = "var(--blue-accent)")}
+                  onBlur={(e) => (e.target.style.borderColor = "var(--border-subtle)")}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary/10 border border-primary/30 text-primary font-semibold text-sm hover:bg-primary/15 hover:border-primary/45 transition-all duration-200"
+                className="w-full inline-flex items-center justify-center gap-2 py-2.5 text-sm font-semibold transition-all hover:opacity-90"
+                style={{ background: "var(--blue-accent)", color: "#0d1117", borderRadius: "8px" }}
               >
-                {sent ? (
-                  <>
-                    <CheckCircle2 size={16} />
-                    Sent Successfully!
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    Send Message
-                  </>
-                )}
+                {sent ? <><CheckCircle2 size={16} /> Sent!</> : <><Send size={15} /> Send Message</>}
               </button>
             </motion.form>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

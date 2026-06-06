@@ -1,139 +1,160 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Briefcase, TrendingUp, Calendar, Building2, Zap, ShieldCheck, Rocket } from "lucide-react";
+import { GraduationCap } from "lucide-react";
+
+const experiences = [
+  {
+    period: "May 2026 — Present",
+    role: "Software Engineering Intern",
+    company: "State Farm",
+    location: "Remote",
+    bullets: [
+      "Developing and maintaining Java 17 Spring Boot microservices exposing REST APIs across internal backend platforms; applying Hibernate/JPA query optimization and connection pool tuning to improve throughput and reduce latency under production load.",
+      "Deploying and managing services on AWS (EC2, RDS, S3) with CloudWatch alarms and IAM least-privilege policies, strengthening observability and security posture across distributed, high-availability service accounts.",
+      "Automated build, test, and release workflows via Jenkins CI/CD and Maven across 3 environments (dev, staging, production), cutting manual deployment overhead by 40% and enabling same-day rollout cycles.",
+      "Authored 60+ unit and integration tests with JUnit and Mockito across Agile sprints; participated in code reviews covering 10+ PRs per sprint, improving defect detection rate before production release.",
+    ],
+  },
+  {
+    period: "Aug 2025 — Present",
+    role: "Student Assistant — Software Engineer",
+    company: "University of Texas at Arlington",
+    location: "Arlington, TX",
+    bullets: [
+      "Developed internal web tools and automation scripts eliminating 5+ hours/week of manual report generation for department staff using Python and Shell.",
+      "Designed and deployed a course management utility backed by PostgreSQL, tracking enrollment, section capacity, and waitlist status across 8+ graduate CS course sections in real time.",
+      "Built and exposed 4 Spring Boot REST endpoints consumed by 3 internal department teams, enforcing JWT-based authentication and request schema validation to ensure secure, consistent data access.",
+      "Refactored a legacy Python reporting pipeline processing 1,000+ student records per run, cutting undetected batch failures by 30% by introducing structured logging and early exit error propagation.",
+    ],
+  },
+];
+
+const education = [
+  {
+    school: "University of Texas at Arlington",
+    degree: "Master of Science in Computer Science",
+    period: "Aug 2025 – May 2027",
+    location: "Arlington, TX",
+  },
+  {
+    school: "Institute of Aeronautical Engineering",
+    degree: "B.Tech in Computer Science & IT",
+    period: "Aug 2021 – May 2025",
+    location: "Hyderabad, India",
+  },
+];
 
 const ExperienceSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
-  const metrics = [
-    { value: "~15%", label: "API Response Time Reduced", icon: Zap },
-    { value: "~25%", label: "Mean Time to Recovery Cut", icon: ShieldCheck },
-    { value: "~60%", label: "Manual Deployment Effort Reduced", icon: Rocket },
-  ];
-
-  const bullets = [
-    "Developed and optimized RESTful microservices using Spring Boot, improving API performance and system reliability.",
-    "Built automated CI/CD pipelines reducing manual deployment effort and accelerating release cycles.",
-    "Implemented monitoring and observability solutions, significantly reducing incident response times.",
-  ];
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="experience" className="py-24 sm:py-32 relative overflow-hidden" ref={ref}>
-      {/* BG accent */}
-      <div
-        className="absolute top-1/2 -right-32 w-72 h-72 rounded-full blur-[100px] opacity-8 pointer-events-none"
-        style={{ background: "hsl(215 50% 62% / 0.06)" }}
-      />
+    <section id="experience" className="py-20 sm:py-28" style={{ background: "var(--bg-base)" }} ref={ref}>
+      <div className="container mx-auto px-6">
+        <div className="max-w-5xl mx-auto">
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
-        >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Work <span className="text-gradient">Experience</span>
-          </h2>
-          <div className="w-16 h-1 bg-gradient-primary rounded-full mb-12" />
+          {/* Two-column: Experience (left) + Education (right) */}
+          <div className="grid lg:grid-cols-[1fr_280px] gap-10 lg:gap-14 items-start">
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="hidden lg:block absolute left-7 top-0 bottom-0 w-px bg-gradient-to-b from-primary/30 via-primary/15 to-transparent" />
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative lg:pl-20"
-            >
-              {/* Timeline node */}
-              <div className="hidden lg:flex absolute -left-0 top-8 w-14 h-14 rounded-full border border-border/60 bg-card items-center justify-center">
-                <Building2 size={20} className="text-primary" />
-              </div>
-
-              {/* Card */}
-              <div className="p-8 rounded-2xl glass border border-border/60 hover:border-primary/25 hover:bg-secondary/20 transition-all duration-300">
-                {/* Header row */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
-                  <div>
-                    <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-1">
-                      Software Engineering Intern
-                    </h3>
-                    <div className="flex items-center gap-2">
-                      <span className="text-primary font-semibold">State Farm</span>
-                      <span className="text-muted-foreground/40">·</span>
-                      <span className="text-xs text-muted-foreground bg-secondary/70 px-2 py-0.5 rounded-md border border-border/50">
-                        Full-time Intern
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground bg-secondary/60 px-3 py-1.5 rounded-lg border border-border/50 self-start whitespace-nowrap">
-                    <Calendar size={13} className="text-primary" />
-                    Summer 2026
-                  </div>
-                </div>
-
-                {/* Bullets */}
-                <ul className="space-y-3 mb-8">
-                  {bullets.map((b, i) => (
-                    <motion.li
-                      key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={inView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.4, delay: 0.35 + i * 0.1 }}
-                      className="flex items-start gap-3 text-muted-foreground text-sm leading-relaxed"
-                    >
-                      <span className="w-5 h-5 rounded-full bg-primary/8 border border-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      </span>
-                      {b}
-                    </motion.li>
-                  ))}
-                </ul>
-
-                {/* Metrics */}
-                <div className="grid grid-cols-3 gap-4">
-                  {metrics.map((metric, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ duration: 0.4, delay: 0.55 + i * 0.1 }}
-                      className="text-center p-4 rounded-xl bg-secondary/30 border border-border/50 hover:border-primary/25 hover:bg-secondary/50 transition-all duration-200"
-                    >
-                      <div className="flex justify-center mb-2">
-                        <div className="w-8 h-8 rounded-lg bg-primary/8 border border-primary/15 flex items-center justify-center">
-                          <metric.icon size={14} className="text-primary" />
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-center gap-1 mb-1">
-                        <TrendingUp size={11} className="text-primary opacity-60" />
-                        <span className="font-display text-lg sm:text-xl font-bold text-gradient leading-none">
-                          {metric.value}
-                        </span>
-                      </div>
-                      <p className="text-[10px] sm:text-xs text-muted-foreground leading-tight">{metric.label}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* "More coming" hint */}
+            {/* LEFT — Experience timeline */}
+            <div>
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.85 }}
-                className="mt-5 flex items-center gap-3 text-xs text-muted-foreground/40 lg:pl-0"
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5 }}
+                className="flex items-center gap-2.5 mb-8"
               >
-                <div className="hidden lg:block w-px h-8 bg-gradient-to-b from-primary/15 to-transparent ml-7" />
-                <span className="ml-0 lg:ml-8 italic">More experience coming as I grow...</span>
+                <span className="text-sm font-mono" style={{ color: "var(--blue-accent)" }}>{"</>"}</span>
+                <h2 className="text-3xl font-bold" style={{ color: "var(--text-primary)", letterSpacing: "-0.025em" }}>
+                  Experience
+                </h2>
               </motion.div>
+
+              <div className="relative space-y-8">
+                {/* Vertical timeline line */}
+                <div
+                  className="absolute left-[5px] top-2 bottom-2 w-px"
+                  style={{ background: "linear-gradient(to bottom, var(--blue-accent), transparent)" }}
+                />
+
+                {experiences.map((exp, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.45, delay: i * 0.12 }}
+                    className="pl-8 relative"
+                  >
+                    {/* Timeline dot */}
+                    <div
+                      className="absolute left-0 top-1.5 w-3 h-3 rounded-full border-2 flex-shrink-0"
+                      style={{
+                        background: "var(--bg-base)",
+                        borderColor: "var(--blue-accent)",
+                        boxShadow: "0 0 6px rgba(88,166,255,0.4)",
+                      }}
+                    />
+
+                    {/* Period */}
+                    <p className="text-xs font-mono font-medium uppercase tracking-widest mb-1.5" style={{ color: "var(--blue-accent)" }}>
+                      {exp.period}
+                    </p>
+
+                    {/* Role + Company */}
+                    <h3 className="text-lg font-bold mb-0.5" style={{ color: "var(--text-primary)" }}>
+                      {exp.role}
+                    </h3>
+                    <p className="text-base mb-4" style={{ color: "var(--text-secondary)" }}>
+                      {exp.company}
+                      <span style={{ color: "var(--text-muted)" }}> · {exp.location}</span>
+                    </p>
+
+                    {/* Bullets */}
+                    <ul className="space-y-2">
+                      {exp.bullets.map((b, j) => (
+                        <li key={j} className="flex items-start gap-2.5 text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                          <span className="mt-2 w-1 h-1 rounded-full flex-shrink-0" style={{ background: "var(--text-muted)" }} />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — Education card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="lg:sticky lg:top-24"
+            >
+              <div
+                className="p-5 rounded-xl"
+                style={{
+                  background: "var(--bg-surface)",
+                  border: "1px solid var(--border-subtle)",
+                }}
+              >
+                <div className="flex items-center gap-2 mb-5">
+                  <GraduationCap size={16} style={{ color: "var(--blue-accent)" }} />
+                  <h3 className="text-base font-bold" style={{ color: "var(--text-primary)" }}>Education</h3>
+                </div>
+
+                <div className="space-y-5">
+                  {education.map((edu, i) => (
+                    <div key={i} className={i > 0 ? "pt-5" : ""} style={i > 0 ? { borderTop: "1px solid var(--border-subtle)" } : {}}>
+                      <p className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>{edu.school}</p>
+                      <p className="text-sm mt-0.5 leading-relaxed" style={{ color: "var(--text-secondary)" }}>{edu.degree}</p>
+                      <p className="text-xs mt-1 font-mono" style={{ color: "var(--text-muted)" }}>{edu.period}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

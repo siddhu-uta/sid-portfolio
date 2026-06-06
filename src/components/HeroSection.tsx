@@ -1,6 +1,6 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import { ArrowDown, FileText, Mail, Terminal, ChevronRight, Github, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Github, Linkedin, Mail, Download, ArrowDown } from "lucide-react";
 
 const roles = [
   "Backend Engineer",
@@ -13,21 +13,19 @@ const HeroSection = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [typing, setTyping] = useState(true);
-  const ref = useRef(null);
 
   useEffect(() => {
     const current = roles[roleIndex];
     let timeout: ReturnType<typeof setTimeout>;
-
     if (typing) {
       if (displayed.length < current.length) {
-        timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 60);
+        timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 65);
       } else {
-        timeout = setTimeout(() => setTyping(false), 1800);
+        timeout = setTimeout(() => setTyping(false), 2000);
       }
     } else {
       if (displayed.length > 0) {
-        timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 35);
+        timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 38);
       } else {
         setRoleIndex((i) => (i + 1) % roles.length);
         setTyping(true);
@@ -37,195 +35,153 @@ const HeroSection = () => {
   }, [displayed, typing, roleIndex]);
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden noise-bg"
-    >
-      {/* Layered background */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-hero" />
+    <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: "var(--bg-base)" }}>
+      {/* Subtle dot grid */}
+      <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none" />
 
-        {/* Dot grid — replaces crosshatch */}
-        <div
-          className="absolute inset-0 opacity-[0.18]"
-          style={{
-            backgroundImage: `radial-gradient(hsl(var(--foreground) / 0.35) 1px, transparent 1px)`,
-            backgroundSize: "28px 28px",
-          }}
-        />
+      {/* Blue glow top-right */}
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[400px] rounded-full blur-[140px] opacity-10 pointer-events-none animate-float-slow"
+        style={{ background: "radial-gradient(circle, #58a6ff 0%, #bc8cff 100%)" }}
+      />
 
-        {/* Noise grain overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: "256px 256px",
-          }}
-        />
+      <div className="container mx-auto px-6 relative z-10 pt-28 pb-16">
+        <div className="max-w-2xl">
 
-        {/* Primary blue glow — upper left */}
-        <div
-          className="absolute -top-20 -left-20 w-[420px] h-[420px] rounded-full blur-[140px] opacity-20 animate-float-slow"
-          style={{ background: "hsl(215 50% 62% / 0.18)" }}
-        />
-
-        {/* Warm amber accent glow — lower right, for contrast */}
-        <div
-          className="absolute bottom-10 -right-16 w-[340px] h-[340px] rounded-full blur-[120px] opacity-20 animate-float-slow"
-          style={{ background: "hsl(35 95% 60% / 0.14)", animationDelay: "4s" }}
-        />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Social Links Badge */}
+          {/* `</>` role line */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-center mb-8"
+            transition={{ duration: 0.4 }}
+            className="flex items-center gap-2 mb-5"
           >
-            <div className="inline-flex items-center gap-5 px-6 py-2.5 rounded-full bg-secondary/60 border border-primary/20 backdrop-blur-sm">
-              <a
-                href="https://github.com/siddhu-uta"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                aria-label="GitHub"
-              >
-                <Github size={20} />
-              </a>
-              <div className="w-px h-4 bg-border/60"></div>
-              <a
-                href="https://www.linkedin.com/in/vinayak-siddhu-bandaru/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
-              <div className="w-px h-4 bg-border/60"></div>
-              <a
-                href="mailto:vinayaksiddhu.devs@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                aria-label="Email"
-              >
-                <Mail size={20} />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-4"
-          >
-            <span className="text-foreground">Hi, I'm </span>
-            <span className="text-gradient">Vinayak Siddhu</span>
-          </motion.h1>
-
-          {/* Typewriter role */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center justify-center gap-2 mb-6"
-          >
-            <Terminal size={18} className="text-primary opacity-60" />
-            <p className="font-mono text-lg sm:text-xl lg:text-2xl text-primary font-medium tracking-tight">
+            <span className="font-mono text-sm font-medium" style={{ color: "var(--blue-accent)" }}>
+              {"</>"}
+            </span>
+            <span className="font-mono text-sm" style={{ color: "var(--blue-accent)" }}>
               {displayed}
-              <span className="cursor-blink border-r-2 border-primary ml-0.5 inline-block h-[1.2em] align-middle" />
-            </p>
+              <span
+                className="cursor-blink border-r-2 ml-0.5 inline-block h-[1em] align-middle"
+                style={{ borderColor: "var(--blue-accent)" }}
+              />
+            </span>
           </motion.div>
+
+          {/* Large heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.06 }}
+            className="font-display font-bold mb-5"
+            style={{
+              fontSize: "clamp(3.4rem, 7vw, 5.5rem)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.035em",
+              color: "var(--text-primary)",
+            }}
+          >
+            Hello, I'm{" "}
+            <span className="text-gradient">Vinayak.</span>
+          </motion.h1>
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-base sm:text-lg text-muted-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed"
+            transition={{ duration: 0.45, delay: 0.14 }}
+            className="text-lg leading-relaxed mb-7 max-w-lg"
+            style={{ color: "var(--text-secondary)", letterSpacing: "-0.005em" }}
           >
-            I design and build reliable, production-grade distributed systems and cloud-native
-            applications. <span className="text-foreground/70 font-medium">MS CS @ UT Arlington</span> · Building what scales.
+            Building scalable distributed systems and cloud-native applications.
+            MS CS student at UT Arlington passionate about backend performance,
+            microservices architecture, and AI/ML infrastructure.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* Social icon links */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-4"
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="flex items-center gap-3 mb-7"
           >
-            {/* Primary CTA — most visually dominant */}
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all duration-300 shadow-lg"
-              style={{ boxShadow: "var(--glow-primary)" }}
-            >
-              View Projects
-              <ChevronRight size={16} />
-            </a>
-            {/* Secondary CTA — outlined */}
+            {[
+              { href: "https://github.com/siddhu-uta", icon: Github, label: "GitHub" },
+              { href: "https://www.linkedin.com/in/vinayak-siddhu-bandaru/", icon: Linkedin, label: "LinkedIn" },
+              { href: "mailto:vinayaksiddhu.devs@gmail.com", icon: Mail, label: "Email" },
+            ].map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="p-2 rounded-lg transition-all duration-200"
+                style={{ color: "var(--text-muted)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-primary)";
+                  (e.currentTarget as HTMLAnchorElement).style.background = "var(--bg-surface)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-muted)";
+                  (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                }}
+              >
+                <Icon size={22} />
+              </a>
+            ))}
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.26 }}
+            className="flex flex-wrap items-center gap-3"
+          >
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border/60 bg-card/50 text-foreground font-semibold text-sm hover:bg-secondary hover:border-border transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold transition-all duration-200 hover:opacity-90"
+              style={{
+                background: "var(--blue-accent)",
+                color: "#0d1117",
+                borderRadius: "8px",
+              }}
             >
-              <FileText size={16} className="text-primary" />
+              <Download size={15} />
               Resume
             </a>
-            {/* Tertiary — text link style */}
             <a
-              href="#contact"
-              className="inline-flex items-center gap-1.5 px-4 py-3.5 text-muted-foreground font-medium text-sm hover:text-foreground transition-colors duration-200"
+              href="#projects"
+              className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold border transition-all duration-200"
+              style={{
+                borderRadius: "8px",
+                borderColor: "var(--border-subtle)",
+                color: "var(--text-primary)",
+                background: "var(--bg-card)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--text-muted)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--border-subtle)";
+              }}
             >
-              <Mail size={15} />
-              Contact Me
+              View Work
             </a>
-          </motion.div>
-
-          {/* Quick stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-10 mt-16 text-sm text-muted-foreground"
-          >
-            {[
-              { value: "3+", label: "Years of Experience" },
-              { value: "15+", label: "Technologies Used" },
-              { value: "2", label: "Production Projects" },
-              { value: "MS", label: "CS @ UT Arlington" },
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col items-center gap-1.5">
-                <span className="font-display text-2xl font-bold text-gradient">{stat.value}</span>
-                <span className="text-[11px] uppercase tracking-widest text-muted-foreground/60 font-medium">{stat.label}</span>
-              </div>
-            ))}
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll cue */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
       >
-        <span className="text-[10px] text-muted-foreground/50 uppercase tracking-widest">Scroll</span>
-        <div className="w-5 h-9 rounded-full border-2 border-muted-foreground/25 flex justify-center pt-1.5">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1 h-1 rounded-full bg-primary"
-          />
-        </div>
+        <ArrowDown size={16} style={{ color: "var(--text-muted)" }} className="animate-bounce" />
       </motion.div>
     </section>
   );
