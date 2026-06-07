@@ -9,10 +9,10 @@ const experiences = [
     company: "State Farm",
     location: "Remote",
     bullets: [
-      "Developing and maintaining Java 17 Spring Boot microservices exposing REST APIs across internal backend platforms; applying Hibernate/JPA query optimization and connection pool tuning to improve throughput and reduce latency under production load.",
-      "Deploying and managing services on AWS (EC2, RDS, S3) with CloudWatch alarms and IAM least-privilege policies, strengthening observability and security posture across distributed, high-availability service accounts.",
-      "Automated build, test, and release workflows via Jenkins CI/CD and Maven across 3 environments (dev, staging, production), cutting manual deployment overhead by 40% and enabling same-day rollout cycles.",
-      "Authored 60+ unit and integration tests with JUnit and Mockito across Agile sprints; participated in code reviews covering 10+ PRs per sprint, improving defect detection rate before production release.",
+      "Resolved 15+ service tickets and delivered new Java 17 Spring Boot features across internal backend platforms, applying Hibernate/JPA query optimization to reduce API latency and improve throughput under production load.",
+      "Contributed to GitLab CI/CD pipelines supporting continuous delivery across dev, staging, and production environments, reducing manual release overhead by 40% and enabling same-day rollout cycles.",
+      "Supporting legacy application modernization efforts by analyzing existing mainframe-era service behavior, documenting system contracts, and assisting migration of critical workflows to Spring Boot microservices.",
+      "Participating in Agile sprints on a persistent product team; authored 60+ JUnit and Mockito tests and contributed CI/CD process improvements, increasing pipeline test coverage and reducing pre-release defect escape rate.",
     ],
   },
   {
